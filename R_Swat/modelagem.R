@@ -12,12 +12,23 @@ for(i in actionsets){
     loadActionSet(conn, i)
 }
 
+# checking available tables
+cas.table.tableInfo(conn, caslib = 'public')
+
+# checking available caslibs
+cas.table.caslibInfo(conn)
+
 # Carregando dados para CAS
 data_dir <- 'data'
 castbl <- cas.read.csv(conn, paste(data_dir, 'hmeq.csv', sep = '/'))
 
-head(castbl)
+class(castbl)
 
+head(castbl)
+# Table summary 
+table <- cas.simple.summary(castbl)
+
+class(castbl)
 # Trazer dados para maquina local
 df <- to.casDataFrame(castbl, obs = nrow(castbl))
 
@@ -57,8 +68,14 @@ cas.sampling.srs(conn,
     table = 'hmeq',
     samppct = 30,
     partind = TRUE,
-    output = list(casOut = list(name = 'hmeq', replace = T), copyVars = 'ALL')
+    output = list(casOut = list(name = 'hmeq', replace = T),
+                  copyVars = 'ALL')
 )
+
+
+hmeq1 <- defCasTable(conn, 'hmeq')
+head(hmeq1)
+
 
 indata <- 'hmeq'
 
