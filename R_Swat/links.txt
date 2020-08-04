@@ -1,0 +1,5 @@
+Github do SWAT: https://github.com/sassoftware/R-swat
+
+Action sets: https://go.documentation.sas.com/?docsetId=allprodsactions&docsetTarget=actionSetsByName.htm&docsetVersion=3.5&locale=en
+
+Documentação: https://developer.sas.com/apis/swat/r/v1.3.0/R-swat.pdf
