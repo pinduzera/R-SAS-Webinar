@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<PMML version="4.2" xmlns="http://www.dmg.org/PMML-4_2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.dmg.org/PMML-4_2 http://www.dmg.org/pmml/v4-2/pmml-4-2.xsd">
+ <Header copyright="Copyright (c) 2020 edhell" description="Generalized Linear Regression Model">
+  <Extension name="user" value="edhell" extender="SoftwareAG PMML Generator"/>
+  <Application name="SoftwareAG PMML Generator" version="2.3.1"/>
+  <Timestamp>2020-07-02 00:23:24</Timestamp>
+ </Header>
+ <DataDictionary numberOfFields="19">
+  <DataField name="BAD" optype="categorical" dataType="string">
+   <Value value="0"/>
+   <Value value="1"/>
+  </DataField>
+  <DataField name="CLAGE" optype="continuous" dataType="double"/>
+  <DataField name="CLNO" optype="continuous" dataType="double"/>
+  <DataField name="DEBTINC" optype="continuous" dataType="double"/>
+  <DataField name="DELINQ" optype="continuous" dataType="double"/>
+  <DataField name="DEROG" optype="continuous" dataType="double"/>
+  <DataField name="LOAN" optype="continuous" dataType="double"/>
+  <DataField name="MORTDUE" optype="continuous" dataType="double"/>
+  <DataField name="NINQ" optype="continuous" dataType="double"/>
+  <DataField name="VALUE" optype="continuous" dataType="double"/>
+  <DataField name="YOJ" optype="continuous" dataType="double"/>
+  <DataField name="JOB_Mgr" optype="continuous" dataType="double"/>
+  <DataField name="JOB_Office" optype="continuous" dataType="double"/>
+  <DataField name="JOB_Other" optype="continuous" dataType="double"/>
+  <DataField name="JOB_ProfExe" optype="continuous" dataType="double"/>
+  <DataField name="JOB_Sales" optype="continuous" dataType="double"/>
+  <DataField name="JOB_Self" optype="continuous" dataType="double"/>
+  <DataField name="REASON_DebtCon" optype="continuous" dataType="double"/>
+  <DataField name="REASON_HomeImp" optype="continuous" dataType="double"/>
+ </DataDictionary>
+ <GeneralRegressionModel modelName="General_Regression_Model" modelType="generalizedLinear" functionName="classification" algorithmName="glm" distribution="binomial" linkFunction="logit">
+  <MiningSchema>
+   <MiningField name="BAD" usageType="predicted" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="CLAGE" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="CLNO" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="DEBTINC" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="DELINQ" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="DEROG" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="LOAN" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="MORTDUE" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="NINQ" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="VALUE" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="YOJ" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="JOB_Mgr" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="JOB_Office" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="JOB_Other" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="JOB_ProfExe" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="JOB_Sales" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="JOB_Self" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="REASON_DebtCon" usageType="active" invalidValueTreatment="returnInvalid"/>
+   <MiningField name="REASON_HomeImp" usageType="active" invalidValueTreatment="returnInvalid"/>
+  </MiningSchema>
+  <Output>
+   <OutputField name="Probability_1" targetField="BAD" feature="probability" value="1" optype="continuous" dataType="double"/>
+   <OutputField name="Predicted_BAD" feature="predictedValue" optype="categorical" dataType="string"/>
+  </Output>
+  <ParameterList>
+   <Parameter name="p0" label="(Intercept)"/>
+   <Parameter name="p1" label="CLAGE"/>
+   <Parameter name="p2" label="CLNO"/>
+   <Parameter name="p3" label="DEBTINC"/>
+   <Parameter name="p4" label="DELINQ"/>
+   <Parameter name="p5" label="DEROG"/>
+   <Parameter name="p6" label="LOAN"/>
+   <Parameter name="p7" label="MORTDUE"/>
+   <Parameter name="p8" label="NINQ"/>
+   <Parameter name="p9" label="VALUE"/>
+   <Parameter name="p10" label="YOJ"/>
+   <Parameter name="p11" label="JOB_Mgr"/>
+   <Parameter name="p12" label="JOB_Office"/>
+   <Parameter name="p13" label="JOB_Other"/>
+   <Parameter name="p14" label="JOB_ProfExe"/>
+   <Parameter name="p15" label="JOB_Sales"/>
+   <Parameter name="p16" label="JOB_Self"/>
+   <Parameter name="p17" label="REASON_DebtCon"/>
+   <Parameter name="p18" label="REASON_HomeImp"/>
+  </ParameterList>
+  <FactorList/>
+  <CovariateList>
+   <Predictor name="CLAGE"/>
+   <Predictor name="CLNO"/>
+   <Predictor name="DEBTINC"/>
+   <Predictor name="DELINQ"/>
+   <Predictor name="DEROG"/>
+   <Predictor name="LOAN"/>
+   <Predictor name="MORTDUE"/>
+   <Predictor name="NINQ"/>
+   <Predictor name="VALUE"/>
+   <Predictor name="YOJ"/>
+   <Predictor name="JOB_Mgr"/>
+   <Predictor name="JOB_Office"/>
+   <Predictor name="JOB_Other"/>
+   <Predictor name="JOB_ProfExe"/>
+   <Predictor name="JOB_Sales"/>
+   <Predictor name="JOB_Self"/>
+   <Predictor name="REASON_DebtCon"/>
+   <Predictor name="REASON_HomeImp"/>
+  </CovariateList>
+  <PPMatrix>
+   <PPCell value="1" predictorName="CLAGE" parameterName="p1"/>
+   <PPCell value="1" predictorName="CLNO" parameterName="p2"/>
+   <PPCell value="1" predictorName="DEBTINC" parameterName="p3"/>
+   <PPCell value="1" predictorName="DELINQ" parameterName="p4"/>
+   <PPCell value="1" predictorName="DEROG" parameterName="p5"/>
+   <PPCell value="1" predictorName="LOAN" parameterName="p6"/>
+   <PPCell value="1" predictorName="MORTDUE" parameterName="p7"/>
+   <PPCell value="1" predictorName="NINQ" parameterName="p8"/>
+   <PPCell value="1" predictorName="VALUE" parameterName="p9"/>
+   <PPCell value="1" predictorName="YOJ" parameterName="p10"/>
+   <PPCell value="1" predictorName="JOB_Mgr" parameterName="p11"/>
+   <PPCell value="1" predictorName="JOB_Office" parameterName="p12"/>
+   <PPCell value="1" predictorName="JOB_Other" parameterName="p13"/>
+   <PPCell value="1" predictorName="JOB_ProfExe" parameterName="p14"/>
+   <PPCell value="1" predictorName="JOB_Sales" parameterName="p15"/>
+   <PPCell value="1" predictorName="JOB_Self" parameterName="p16"/>
+   <PPCell value="1" predictorName="REASON_DebtCon" parameterName="p17"/>
+   <PPCell value="1" predictorName="REASON_HomeImp" parameterName="p18"/>
+  </PPMatrix>
+  <ParamMatrix>
+   <PCell targetCategory="1" parameterName="p0" df="1" beta="-3.60912377211324"/>
+   <PCell targetCategory="1" parameterName="p1" df="1" beta="-0.00261179788379209"/>
+   <PCell targetCategory="1" parameterName="p2" df="1" beta="-0.0294679583122553"/>
+   <PCell targetCategory="1" parameterName="p3" df="1" beta="0.102391889166981"/>
+   <PCell targetCategory="1" parameterName="p4" df="1" beta="0.741857417189534"/>
+   <PCell targetCategory="1" parameterName="p5" df="1" beta="0.464188609966034"/>
+   <PCell targetCategory="1" parameterName="p6" df="1" beta="-2.23452376712477e-05"/>
+   <PCell targetCategory="1" parameterName="p7" df="1" beta="-7.07702067306869e-06"/>
+   <PCell targetCategory="1" parameterName="p8" df="1" beta="0.14077482111509"/>
+   <PCell targetCategory="1" parameterName="p9" df="1" beta="4.75726846538536e-06"/>
+   <PCell targetCategory="1" parameterName="p10" df="1" beta="-0.0115842066569709"/>
+   <PCell targetCategory="1" parameterName="p11" df="1" beta="-0.572197502375595"/>
+   <PCell targetCategory="1" parameterName="p12" df="1" beta="-1.11855378272311"/>
+   <PCell targetCategory="1" parameterName="p13" df="1" beta="-0.412380963814919"/>
+   <PCell targetCategory="1" parameterName="p14" df="1" beta="-0.370431522051632"/>
+   <PCell targetCategory="1" parameterName="p15" df="1" beta="0.306169974466532"/>
+   <PCell targetCategory="1" parameterName="p17" df="1" beta="-0.246365121771711"/>
+  </ParamMatrix>
+ </GeneralRegressionModel>
+</PMML>
