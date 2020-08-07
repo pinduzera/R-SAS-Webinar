@@ -100,6 +100,7 @@ rownames(compare) <- NULL
 compare[,c('TP','FP','FN','TN')]
 
 library('ggplot2')
+library("plotly")
 
 # Cria curva ROC
 options(repr.plot.width=14, repr.plot.height=6)
@@ -111,16 +112,17 @@ plt <- ggplot(data = roc[c('FPR', 'Sensitivity')],
     theme_bw()
 plt
 
-embed_notebook(ggplotly(plt))
+ggplotly(plt)
 
-plt <- ggplot(data = roc[,c('ACC', 'CutOff')],
+plt2 <- ggplot(data = roc[,c('ACC', 'CutOff')],
     aes(y = ACC, x = CutOff, color = ACC)) +
     geom_segment(aes(x=CutOff, xend=dplyr::lead(CutOff), y=ACC, yend=dplyr::lead(ACC))) +
   scale_colour_gradient2(low="red", mid = 'red', high="green")+
     labs(x = 'CutOff', y = 'Accuracy') +
     theme_bw()
-plt
+plt2
 
-embed_notebook(ggplotly(plt))
+ggplotly(plt2)
+#embed_notebook(ggplotly(plt2))
 
 cas.session.endSession(conn)
