@@ -3,7 +3,7 @@
  <Header copyright="Copyright (c) 2020 edhell" description="Generalized Linear Regression Model">
   <Extension name="user" value="edhell" extender="SoftwareAG PMML Generator"/>
   <Application name="SoftwareAG PMML Generator" version="2.3.1"/>
-  <Timestamp>2020-08-04 13:20:07</Timestamp>
+  <Timestamp>2020-08-13 15:07:34</Timestamp>
  </Header>
  <DataDictionary numberOfFields="19">
   <DataField name="BAD" optype="categorical" dataType="string">
@@ -118,23 +118,23 @@
    <PPCell value="1" predictorName="REASON_HomeImp" parameterName="p18"/>
   </PPMatrix>
   <ParamMatrix>
-   <PCell targetCategory="1" parameterName="p0" df="1" beta="-4.27934140199093"/>
-   <PCell targetCategory="1" parameterName="p1" df="1" beta="-0.00298301117428376"/>
-   <PCell targetCategory="1" parameterName="p2" df="1" beta="-0.0300238190285951"/>
-   <PCell targetCategory="1" parameterName="p3" df="1" beta="0.12270740886883"/>
-   <PCell targetCategory="1" parameterName="p4" df="1" beta="0.769032796574787"/>
-   <PCell targetCategory="1" parameterName="p5" df="1" beta="0.503462184730209"/>
-   <PCell targetCategory="1" parameterName="p6" df="1" beta="-2.28093154761273e-05"/>
-   <PCell targetCategory="1" parameterName="p7" df="1" beta="-8.43212399406625e-06"/>
-   <PCell targetCategory="1" parameterName="p8" df="1" beta="0.135474116505481"/>
-   <PCell targetCategory="1" parameterName="p9" df="1" beta="5.36722235999236e-06"/>
-   <PCell targetCategory="1" parameterName="p10" df="1" beta="-0.00965761236304165"/>
-   <PCell targetCategory="1" parameterName="p11" df="1" beta="-0.556378163446876"/>
-   <PCell targetCategory="1" parameterName="p12" df="1" beta="-1.2377711365845"/>
-   <PCell targetCategory="1" parameterName="p13" df="1" beta="-0.42668389093129"/>
-   <PCell targetCategory="1" parameterName="p14" df="1" beta="-0.357981259795363"/>
-   <PCell targetCategory="1" parameterName="p15" df="1" beta="0.186407247862928"/>
-   <PCell targetCategory="1" parameterName="p17" df="1" beta="-0.223435293526068"/>
+   <PCell targetCategory="1" parameterName="p0" df="1" beta="-3.78489860302097"/>
+   <PCell targetCategory="1" parameterName="p1" df="1" beta="-0.00338565110042349"/>
+   <PCell targetCategory="1" parameterName="p2" df="1" beta="-0.0277920002924864"/>
+   <PCell targetCategory="1" parameterName="p3" df="1" beta="0.109987518657311"/>
+   <PCell targetCategory="1" parameterName="p4" df="1" beta="0.7467119373709"/>
+   <PCell targetCategory="1" parameterName="p5" df="1" beta="0.56717792116891"/>
+   <PCell targetCategory="1" parameterName="p6" df="1" beta="-2.38584242991019e-05"/>
+   <PCell targetCategory="1" parameterName="p7" df="1" beta="-9.93491608794264e-06"/>
+   <PCell targetCategory="1" parameterName="p8" df="1" beta="0.148819421424858"/>
+   <PCell targetCategory="1" parameterName="p9" df="1" beta="6.46916246852097e-06"/>
+   <PCell targetCategory="1" parameterName="p10" df="1" beta="-0.0115998756421643"/>
+   <PCell targetCategory="1" parameterName="p11" df="1" beta="-0.577191312494459"/>
+   <PCell targetCategory="1" parameterName="p12" df="1" beta="-1.20258404180196"/>
+   <PCell targetCategory="1" parameterName="p13" df="1" beta="-0.423831766036524"/>
+   <PCell targetCategory="1" parameterName="p14" df="1" beta="-0.333669093156661"/>
+   <PCell targetCategory="1" parameterName="p15" df="1" beta="0.229497741948019"/>
+   <PCell targetCategory="1" parameterName="p17" df="1" beta="-0.226979255735585"/>
   </ParamMatrix>
  </GeneralRegressionModel>
 </PMML>

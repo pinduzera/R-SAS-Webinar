@@ -9,8 +9,9 @@ dm_scoreddf <- data.frame(pred)
 colnames(dm_scoreddf) <- c("P_BAD0", "P_BAD1")
 
 # Print/plot model output
-png("rpt_forestMsePlot.png")
+png("rpt_forestMsePlot2.png")
 plot(dm_model, main='randomForest MSE Plot')
+legend("topright", colnames(dm_model$err.rate),col=1:3,cex=0.8,fill=1:3)
 dev.off()
 
 write.csv(importance(dm_model), 
