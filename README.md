@@ -2,7 +2,7 @@
 
 ## Português
 
-Na pasta **"ES"** estão todos os arquivos usados no webinar R e SAS.
+Na pasta **"PT"** estão todos os arquivos usados no webinar R e SAS em português.
 
 Os códigos estão disponíveis em `.ipynb` (para uso em notebooks jupyter) e também em` .R` se você preferir nativo.
 
@@ -29,7 +29,7 @@ Os códigos estão disponíveis em `.ipynb` (para uso em notebooks jupyter) e ta
 
 ## Español
 
-En la carpeta **"ES"** estan todos los archivos utilizados en el webinar de R y SAS juntos. 
+En la carpeta **"ES"** estan todos los archivos utilizados en el webinar de R y SAS en español. 
 
 Los codigos estan disponibles en `.ipynb` (para utilizar en jupyter notebooks) y tambien en `.R` si prefiere nativo.
 
