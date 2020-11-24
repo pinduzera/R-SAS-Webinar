@@ -1,0 +1,7 @@
+Swat Github: https://github.com/sassoftware/R-swat
+
+ActionSets: https://go.documentation.sas.com/?docsetId=allprodsactions&docsetTarget=actionSetsByName.htm&docsetVersion=3.5&locale=en
+
+Docs R Swat: https://developer.sas.com/apis/swat/r/v1.3.0/R-swat.pdf
+
+Documentation - OS objects ModelStudio: https://go.documentation.sas.com/?cdcId=vdmmlcdc&cdcVersion=8.5&docsetId=vdmmlref&docsetTarget=p0doq3u7i2yghzn1azsbn1eu9zmf.htm&locale=en

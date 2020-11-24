@@ -1,0 +1,76 @@
+#-------------------------------------------------------------------------------
+# Language: R
+#-------------------------------------------------------------------------------
+# Set R-work to node-work directory
+dm_nodedir <- '/opt/sas/viya/config/var/tmp/compsrv/default/a3f25ad9-acf1-4c11-babf-45c0f78feae5/SAS_work58510000AE98_sasserver.demo.sas.com/2b36826f-87cd-40db-aba5-fdd164ea84ab'
+setwd(dm_nodedir)
+
+# Variable declarations
+dm_dec_target <- 'BAD'
+dm_partitionvar <- '_PartInd_'
+dm_partition_train_val <- 1
+
+dm_class_input <- c("IMP_DELINQ","IMP_DEROG","IMP_JOB","IMP_NINQ","IMP_REASON")
+dm_interval_input <- c("IMP_CLAGE","IMP_CLNO","IMP_DEBTINC","IMP_MORTDUE","IMP_VALUE","IMP_YOJ"    ,"LOAN")
+dm_input <- c(dm_class_input, dm_interval_input)
+dm_model_formula <- as.formula(paste(dm_dec_target, '~', paste(dm_input, collapse='+')))
+dm_predictionvar <- c('P_BAD0', 'P_BAD1')
+dm_classtarget_intovar <- 'I_BAD'
+dm_classtarget_level <- c('0', '1')
+
+#-------------------------------------------------------------------------------
+# Generate data frame: Y
+#-------------------------------------------------------------------------------
+dm_inputdf <- read.csv(file='node_data.csv', stringsAsFactors=TRUE, check.names=FALSE)
+
+# Change class variable type to R factor
+dm_inputdf$BAD <- factor(dm_inputdf$BAD, ordered=FALSE)
+dm_inputdf$IMP_DELINQ <- factor(dm_inputdf$IMP_DELINQ, ordered=FALSE)
+dm_inputdf$IMP_DEROG <- factor(dm_inputdf$IMP_DEROG, ordered=FALSE)
+dm_inputdf$IMP_NINQ <- factor(dm_inputdf$IMP_NINQ, ordered=FALSE)
+
+dm_traindf = subset(dm_inputdf, get(dm_partitionvar) == dm_partition_train_val)
+
+#-------------------------------------------------------------------------------
+# USER CODE
+#-------------------------------------------------------------------------------
+# Python or R code based on the Language property.
+#
+# Note that a few lines of Python or R code are added before your code; for example:
+# Python:
+#  dm_class_input = ["class_var_1", "class_var_2"]
+#  dm_interval_input = ["numeric_var_1", "numeric_var_2"]
+# R:
+#  dm_class_input <- c("class_var_1", "class_var_2")
+#  dm_interval_input <- c("numeric_var_1", "numeric_var_2")
+#
+# For Python, use the Node Configuration section of the Project Settings to prepend
+# any configuration code, which is executed before the above code. During execution,
+# this code is automatically prepended to every node that runs Python code.
+#
+# After running the node, the Python or R code window in the node results displays
+# the actual code that was executed. START ENTERING YOUR CODE ON THE NEXT LINE.
+
+library(randomForest)
+
+# RandomForest
+dm_model <- randomForest(dm_model_formula, ntree=100, mtry=5, data=dm_traindf, importance=TRUE)
+
+# Score
+pred <- predict(dm_model, dm_inputdf, type="prob")
+dm_scoreddf <- data.frame(pred)
+colnames(dm_scoreddf) <- c("P_BAD0", "P_BAD1")
+
+# Print/plot model output
+png("rpt_forestMsePlot.png")
+plot(dm_model, main='randomForest MSE Plot')
+dev.off()
+
+write.csv(importance(dm_model), 
+          file="rpt_forestIMP.csv", 
+          row.names=TRUE)
+
+#-------------------------------------------------------------------------------
+# Generate data frame: Y; Supervised model
+#-------------------------------------------------------------------------------
+write.csv(dm_scoreddf, file='node_scored.csv', row.names=FALSE, fileEncoding='UTF-8')

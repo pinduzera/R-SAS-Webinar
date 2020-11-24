@@ -1,0 +1,2 @@
+Predicted_BAD (char)
+Probability_1 (dec)

@@ -1,9 +1,0 @@
-1) Copiar certificado da maquina linux para desktop do windows
-	/opt/sas/viya/config/etc/SASSecurityCertificateFramework/cacerts/vault-ca.crt
-
-2) Criar variavel de ambiente no windows
-	CAS_CLIENT_SSL_CA_LIST apontar para desktop/vault-ca.crt
-
-3) Conectar com o CAS usando
-	porta - 8777
-	hostname - fully-qualified-name
