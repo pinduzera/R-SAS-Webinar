@@ -5,19 +5,35 @@ library('ggplot2')
 library('reshape2')
 options(cas.print.messages = FALSE)
 
-conn <- CAS('pdcesx05188.exnet.sas.com', port=8777, caslib = 'casuser', username = 'sasdemo', password = 'Orion123', protocol = "http")
+conn <- CAS('servername.com', 
+            port=8777, 
+            caslib = 'casuser',
+            username = 'username',
+            password = 'password',
+            protocol = "http")
 
 actionsets <- c('sampling', 'fedsql', 'decisionTree', 'neuralNet', 'percentile')
 for(i in actionsets){
     loadActionSet(conn, i)
 }
 
+# checking available tables
+cas.table.tableInfo(conn, caslib = 'public')
+
+# checking available caslibs
+cas.table.caslibInfo(conn)
+
 # Carregando dados para CAS
 data_dir <- 'data'
 castbl <- cas.read.csv(conn, paste(data_dir, 'hmeq.csv', sep = '/'))
 
-head(castbl)
+class(castbl)
 
+head(castbl)
+# Table summary 
+table <- cas.simple.summary(castbl)
+
+class(castbl)
 # Trazer dados para maquina local
 df <- to.casDataFrame(castbl, obs = nrow(castbl))
 
@@ -32,17 +48,17 @@ tbl <- cas.simple.distinct(castbl)$Distinct[,c('Column', 'NMiss')]
 tbl
 
 
-# Pegando dados missing
+# Cogiendo datos missing
 cas.nmiss(castbl)
 
-# Visualizacao de missing
+# Visualizacion de missing
 tbl$PctMiss <- tbl$NMiss/nrow(castbl)
 ggplot(tbl, aes(Column, PctMiss)) +
     geom_col(fill = 'blue') +
     ggtitle('Pct Missing Values') +
     theme(plot.title = element_text(hjust = 0.5))
 
-# Imputacao de dados missing
+# Umputacions de datos missing
 cas.dataPreprocess.impute(castbl,
     methodContinuous = 'MEDIAN',
     methodNominal = 'MODE',
@@ -52,31 +68,37 @@ cas.dataPreprocess.impute(castbl,
                 replace = TRUE)
 )
 
-# Particionamento de dados
+# Particionamento de datos
 cas.sampling.srs(conn,
     table = 'hmeq',
     samppct = 30,
     partind = TRUE,
-    output = list(casOut = list(name = 'hmeq', replace = T), copyVars = 'ALL')
+    output = list(casOut = list(name = 'hmeq', replace = T),
+                  copyVars = 'ALL')
 )
+
+
+hmeq1 <- defCasTable(conn, 'hmeq')
+head(hmeq1)
+
 
 indata <- 'hmeq'
 
-# Pega infromacao das variaveis
+# Cogiendo informacion de las variaveis
 colinfo <- head(cas.table.columnInfo(conn, table = indata)$ColumnInfo, -1)
 
-# Variavel target
+# Variable target
 target <- colinfo$Column[1]
 
-# Separacao para modelos que lidam com missing
+# Separacion para modelos que saben utilizar missing
 inputs <- colinfo$Column[-1]
 nominals <- c(target, subset(colinfo, Type == 'varchar')$Column)
 
-# Separacao para modelos que nao lidam com missing
+# Separacao para modelos que no saben utilizar missing
 imp.inputs <- grep('IMP_', inputs, value = T)
 imp.nominals <- c(target, grep('IMP_', nominals, value = T))
 
-# Treina modelos
+# Entrenando modelos
 cas.decisionTree.dtreeTrain(conn,
     table = list(name = indata, where = '_PartInd_ = 0'),
     target = target,
@@ -116,7 +138,7 @@ scores <- c(cas.decisionTree.dtreeScore, cas.decisionTree.forestScore,
             cas.decisionTree.gbtreeScore, cas.neuralNet.annScore)
 names(scores) <- models
 
-# Funcao para atumatizar processo de predicao em novos dados
+# Funcion para automatizar el processo de predicion en novos datos
 score.params <- function(model){return(list(
     object       = defCasTable(conn, indata),
     modelTable   = list(name = paste0(model, '_model')),
@@ -126,10 +148,10 @@ score.params <- function(model){return(list(
 ))}
 lapply(models, function(x) {do.call(scores[[x]], score.params(x))})
 
-# Carrega actionset para scoragem
+# Carga actionset para scoring
 loadActionSet(conn, 'percentile')
 
-# Funcao para comparacao de modelos
+# Funcion para comparacion de modelos
 assess.model <- function(model){
     cas.percentile.assess(conn,
         table    = list(name = paste0(model,'_scored'), 
@@ -148,25 +170,30 @@ for (i in 1:length(models)){
     roc.df <- rbind(roc.df, tmp)
 }
 
-# Manipulacao do DF
+# Manipulacion del data.frame
 compare <- subset(roc.df, round(roc.df$CutOff, 2) == 0.5)
 rownames(compare) <- NULL
 compare[,c('Model','TP','FP','FN','TN')]
 
-# Cria dataframe pra comparar missclassification
+# Crea data.frame para comparar missclassification
 compare$Misclassification <- 1 - compare$ACC
 miss <- compare[order(compare$Misclassification), c('Model','Misclassification')]
 rownames(miss) <- NULL
 miss
 
-# Add nova coluna pra ser usada com label da curva Roc
+# Añadir nueva coluna para ser usada como label en la curva Roc
 roc.df$Models <- paste(roc.df$Model, round(roc.df$C, 3), sep = ' - ')
 
-# Cria curva ROC
+# Crea curva ROC
 ggplot(data = roc.df[c('FPR', 'Sensitivity', 'Models')],
     aes(x = as.numeric(FPR), y = as.numeric(Sensitivity), colour = Models)) +
     geom_line() +
     labs(x = 'False Positive Rate', y = 'True Positive Rate')
+
+library('magrittr')
+p <- plotly::ggplotly(plot) %>% plotly::layout(plot, hovermode = "x")
+
+p
 
 # Fim sessao
 cas.session.endSession(conn)
