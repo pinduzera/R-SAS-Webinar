@@ -1,18 +1,18 @@
 library('missForest')
 
-## Transformando espaco em branco em NA
-dm_traindf[dm_traindf==""] <- NA
+## Transformando espacios blancos en NA
+dm_inputdf[dm_inputdf==""] <- NA
 
-## Aplicando Inputacao
-imp <- missForest(dm_traindf, maxiter = 2, ntree = 30) 
+## Aplicando Imputacion
+imp <- missForest(dm_inputdf, maxiter = 2, ntree = 30) 
 
-## retirando dados imputados
+## Sacando los datos imputados
 dm_scoreddf <- imp$ximp
 dm_scoreddf$BAD <- as.numeric(dm_scoreddf$BAD) - 1
 
 ## Output BAD
 print("/nInput")
-head(dm_traindf$BAD)
+head(dm_inputdf$BAD)
 
 ## Data frame output
 print("/nScored")
