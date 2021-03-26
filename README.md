@@ -4,7 +4,7 @@
 
 Na pasta **"PT"** estão todos os arquivos usados no webinar R e SAS em português.
 
-Os códigos estão disponíveis em `.ipynb` (para uso em notebooks jupyter) e também em` .R` se você preferir nativo.
+Os códigos estão disponíveis em `.ipynb` (para uso em notebooks jupyter) e também em `.R`caso prefira nativo.
 
 ### Descrição das pastas
 
