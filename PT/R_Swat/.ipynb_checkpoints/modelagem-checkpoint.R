@@ -5,7 +5,7 @@ library('ggplot2')
 library('reshape2')
 options(cas.print.messages = FALSE)
 
-conn <- CAS('pdcesx05188.exnet.sas.com', port=8777, caslib = 'casuser', username = 'sasdemo', password = 'Orion123', protocol = "http")
+conn <- CAS('sasserver.com', port=8777, caslib = 'casuser', username = 'username', password = 'password', protocol = "http")
 
 actionsets <- c('sampling', 'fedsql', 'decisionTree', 'neuralNet', 'percentile')
 for(i in actionsets){
